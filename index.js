@@ -12,9 +12,9 @@ const render = require("./src/page-template.js");
 const Employee = require("./lib/Employee.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
-const employees = [];
+const team = [];
 promptManager()
-async function promptManager(name,id,email,officeNumebr) {
+async function promptManager() {
   const answers = await inquirer.prompt([
     {
       type: "input",
@@ -43,7 +43,7 @@ async function promptManager(name,id,email,officeNumebr) {
     answers.email,
     answers.officeNumber
   );
-  employees.push(manager);
+  team.push(manager);
   promptMenu()
 }
 
@@ -76,7 +76,7 @@ async function promptEngineer() {
     answers.email,
     answers.github
   );
-  employees.push(engineer);
+  team.push(engineer);
 }
 
 async function promptIntern() {
@@ -108,8 +108,8 @@ async function promptIntern() {
     answers.email,
     answers.school
   );
-  employees.push(intern);
-  promptMenu()
+  team.push(intern);
+  // promptMenu()
 }
 
 async function promptMenu() {
@@ -130,7 +130,7 @@ async function promptMenu() {
       await promptMenu();
       break;
     case 'Finish building the team':
-      const html = render(employees);
+      const html = render(team);
       await fs.writeFile(outputPath, html);
       break;
     default:
